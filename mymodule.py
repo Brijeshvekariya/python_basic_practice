@@ -3,6 +3,13 @@ def sum(num1,num2):
     print(ans)
     
 product_price = 250
+if __name__ == "__main__":
+    sum(12,21)
+print(__name__)
+'''
+if we print __name__ , then we get '__main__' if we run from here and if we run from anyother place then we get '__mymodule__', 
+so simply we put condition on this, error solved f running two times
+'''
 
 
 '''
