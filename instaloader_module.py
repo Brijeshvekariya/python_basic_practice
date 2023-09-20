@@ -9,11 +9,11 @@ print("Download Successfully")
 
 
 # # # it will throw error
-# # # insta.download_post(name,post=True)
-# # # print("download Succesfully")
+# insta.download_post(name,post=True)
+# print("download Succesfully")
 
-# # insta.download_profile(name,profile_pic_only=False)
-# # print("Download Successfully")
+# insta.download_profile(name,profile_pic_only=False)
+# print("Download Successfully")
 # # # profile = insta.download_profile(name , download_stories_only= True)
 # # # Replace 'target_username' with the username of the profile you want to access
 # target_username = name
