@@ -1,3 +1,3 @@
 import os
-os.system("calc")
-os.startfile("chrome")
+# os.system("calc")
+# os.startfile("chrome")

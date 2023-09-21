@@ -17,7 +17,7 @@ finally:
 
 try:
     a=10
-    b=K  # if b = int and on error occur then else part will also executed
+    b=5  # if b = int and on error occur then else part will also executed
 
     ans = a+b
     print(ans)
