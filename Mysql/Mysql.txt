@@ -1,0 +1,136 @@
+DBMS :- Database Management System
+
+--> It stores large amount of data
+
+per company/software there is only Database
+
+but there is more than one tables in Database
+
+SQL:- Structured Query Langauge:
+--> To store the data in Structured format using rows and columns(tables.)
+
+mysql
+oracle
+postgre
+mongodb
+
+
+mysql :-
+
+Host : localhost(127.0.0.1)
+port : 3306
+
+Database Creation:-
+CREATE DATABASE 7aug_python
+
+Veiw all databases:
+SHOW DATABASES
+
+Table Creation:
+
+CREATE TABLE student(
+	stu_id int,
+    stu_name varchar(30),
+    stu_subject varchar(30)
+
+)
+
+Insert data in Table:
+
+INSERT INTO student(stu_id,stu_name,stu_subject) VALUES(1,"Brijesh","Python"),(2,"Mehul","Java")
+
+To change column name :
+
+ALTER TABLE student CHANGE stu_id student_id int
+
+To add new column:
+
+ALTER TABLE student ADD stu_marks int
+
+To update the data in table:
+
+UPDATE student set stu_name="Manav" where student_id = 2
+
+To delete row from table:
+
+DELETE FROM student where student_id=2
+
+To delete column from table:
+
+ALTER TABLE student drop COLUMN stu_marks
+
+To clear all data from table:
+
+TRUNCATE TABLE student
+
+To delete whole table:
+
+DROP TABLE student
+
+Interview Question:
+--> Truncate will delete all the data in table and drop will delete whole table
+
+delete database:
+
+DROP DATABASE 7aug_python
+
+Keys in SQL :
+
+autoincrement :- It increases the value automatically when new data Insert
+
+1. Primary Key :- It is Constraint in sql that identifies a uique value in table
+
+--> Only one primary key is allowed in one table.
+--> It will not accept null values.
+
+CREATE TABLE category
+(
+    cat_id INT PRIMARY KEY AUTO_INCREMENT,
+    cat_name VARCHAR(40)
+)
+
+2. Foriegn key :- It is a Constraint in sql that refers to the primary key of another table.
+
+--> we can have multiple foriegn key in one table
+--> It is used to link between two or more tables.
+
+CREATE TABLE subcategory
+(
+    subcate_id int PRIMARY KEY AUTO_INCREMENT,
+    subcate_name varchar(40),
+    cat_id_fk int,
+    FOREIGN KEY (cat_id_fk ) REFERENCES category(cat_id)
+
+)
+
+CREATE TABLE product
+(
+prd_id int PRIMARY KEY AUTO_INCREMENT,
+prd_name varchar(50),
+prd_price int,
+prd_dct_price int,
+
+cat_id_fk int,
+subcate_id_fk int,
+
+FOREIGN KEY(cat_id_fk) REFERENCES category(cat_id),
+FOREIGN KEY(subcate_id_fk) REFERENCES subcategory(subcate_id)
+
+)
+
+3. Unique Key : It is Constraint in sql that identifies a unique values in table.
+
+primary key                                                             Unique Key
+
+It does not accept null values                                  It accept null values
+It support AUTO_INCREMENT                                       It deos not support AUTO_INCREMENT
+Only one primry key in one table                                Multiple unique key in one table
+It support only int                                             it support all datatypes
+
+
+CREATE TABLE person
+(
+    person_id int PRIMARY KEY AUTO_INCREMENT,
+    person_name varchar(50),
+    person_mobile varchar(10) UNIQUE NOT null
+)
