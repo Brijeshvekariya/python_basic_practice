@@ -1,0 +1,3 @@
+tkinter :- It is a module which is used to create GUI based Applications and desktop Applications.
+
+--> To use tkinter we have to import tkinter
