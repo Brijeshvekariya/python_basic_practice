@@ -25,9 +25,34 @@ def insertdata():
         e_mobile.delete(0,'end')
         msg.showinfo("Insert Status","Data Inserted Successfully")
 
-def updatedata():
+def searchdata():
+    e_fname.delete(0,'end')
+    e_lname.delete(0,'end')
+    e_email.delete(0,'end')
+    e_mobile.delete(0,'end')
     if e_id.get()=="":
-        msg.showerror("Update Status"<"Enter Student ID")
+        msg.showerror("Search Status","Id is Mandatory for search Operation")
+
+    else:
+        conn=db_connect()
+        cursor = conn.cursor()
+        query = "select * from student where id = %s"
+        args = (e_id.get(),)
+        cursor.execute(query,args)
+
+        row = cursor.fetchall()  # create row to store data from database
+
+        if row:
+            for i in row:
+                e_fname.insert(0,i[1])
+                e_lname.insert(0,i[2])
+                e_email.insert(0,i[3])
+                e_mobile.insert(0,i[4])
+        else:
+            msg.showerror("Search Status","ID not found")
+def updatedata():
+    if e_id.get()=="" or e_fname=="" or e_lname=="" or e_email=="" or e_mobile=="":
+        msg.showerror("Update Status"<"All Field are Mandatory")
     else:
         conn = db_connect()
         cursor = conn.cursor()
@@ -36,11 +61,27 @@ def updatedata():
         cursor.execute(query,args)
         conn.commit()
         conn.close()
+        e_id.delete(0,'end')
         e_fname.delete(0,'end')  # it is used to blank input field after data inserting
         e_lname.delete(0,'end')
         e_email.delete(0,'end')
         e_mobile.delete(0,'end')
         msg.showinfo("Update Status","Data Updated Successfully")
+
+def deletedata():
+    if e_id.get() == "":
+        msg.showerror("Delete Status","ID is mandatory")
+    else:
+        conn = db_connect()
+        cursor = conn.cursor()
+        query = "delete from student where id = %s"
+        args = (e_id.get(),)
+        msg.askquestion("Delete Status","Do you want to confirm Delete")
+        cursor.execute(query,args)
+        conn.commit()
+        conn.close()
+        e_id.delete(0,'end')
+        msg.showinfo("Delete Status","Data Deleted Successfully")
 
 
 root = Tk()
@@ -78,11 +119,11 @@ e_mobile.place(x=150,y=250)
 
 insert = Button(root,text="INSERT",bg="black",fg="white",command=insertdata)
 insert.place(x=50,y=300)
-search = Button(root,text="SEARCH",bg="black",fg="white")
+search = Button(root,text="SEARCH",bg="black",fg="white",command=searchdata)
 search.place(x=110,y=300)
 update = Button(root,text="UPDATE",bg="black",fg="white",command=updatedata)
 update.place(x=170,y=300)
-delete = Button(root,text="DELETE",bg="black",fg="white")
+delete = Button(root,text="DELETE",bg="black",fg="white",command=deletedata)
 delete.place(x=230,y=300)
 
 root.mainloop()
