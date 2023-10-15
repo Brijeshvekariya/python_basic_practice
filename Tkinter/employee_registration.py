@@ -25,6 +25,32 @@ def insertdata():
         e_bonus.delete(0,'end')
         msg.showinfo("Insert Status","Data Inserted Successfully")
 
+def searchdata():
+    e_name.delete(0,'end')
+    e_dept.delete(0,'end')
+    e_salary.delete(0,'end')
+    e_bonus.delete(0,'end')
+    if e_id.get()=="":
+        msg.showerror("Search Status","Id is Mandatory for search Operation")
+
+    else:
+        conn=db_connect()
+        cursor = conn.cursor()
+        query = "select * from employee where id = %s"
+        args = (e_id.get(),)
+        cursor.execute(query,args)
+
+        row = cursor.fetchall()  # create row to store data from database
+
+        if row:
+            for i in row:
+                e_name.insert(0,i[1])
+                e_dept.insert(0,i[2])
+                e_salary.insert(0,i[3])
+                e_bonus.insert(0,i[4])
+        else:
+            msg.showerror("Search Status","ID not found")
+
 
 
 root = Tk()
@@ -62,7 +88,7 @@ e_bonus.place(x=150,y=250)
 
 insert = Button(root,text="INSERT",bg="black",fg="white",command=insertdata)
 insert.place(x=50,y=300)
-search = Button(root,text="SEARCH",bg="black",fg="white")
+search = Button(root,text="SEARCH",bg="black",fg="white",command=searchdata)
 search.place(x=110,y=300)
 update = Button(root,text="UPDATE",bg="black",fg="white")
 update.place(x=170,y=300)
